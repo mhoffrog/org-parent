@@ -1,0 +1,1 @@
+# The base parent for all open-source projects coming from mhoffrog.
