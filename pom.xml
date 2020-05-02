@@ -5,7 +5,7 @@
 
 	<groupId>de.mhoffrogge</groupId>
 	<artifactId>org-parent</artifactId>
-	<version>3-SNAPSHOT</version>
+	<version>3</version>
 	<packaging>pom</packaging>
 
 	<name>mhoffrogge</name>
@@ -59,7 +59,7 @@
 	<properties>
 		<project.scm.id>github</project.scm.id>
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
-		<version.maven-javadoc-plugin>2.10.4</version.maven-javadoc-plugin>
+		<version.maven-javadoc-plugin>3.2.0</version.maven-javadoc-plugin>
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
 		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
@@ -69,6 +69,8 @@
 		<!-- Overwrite <phase.attach-javadocs> with none or empty value, if attached-javadocs 
 			must be skipped -->
 		<phase.attach-javadocs>package</phase.attach-javadocs>
+		<javadoc.doclint>none</javadoc.doclint>
+		<skip.gpg.signing>true</skip.gpg.signing>
 	</properties>
 
 	<build>
@@ -85,6 +87,14 @@
 							<version>${version.unleash-scm-provider-git}</version>
 						</dependency>
 					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-javadoc-plugin</artifactId>
+					<version>${version.maven-javadoc-plugin}</version>
+					<configuration>
+						<doclint>${javadoc.doclint}</doclint>
+					</configuration>
 				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -131,7 +141,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${version.maven-javadoc-plugin}</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -162,6 +171,7 @@
 						<configuration>
 							<keyname>${gpg.keyname}</keyname>
 							<passphraseServerId>${gpg.keyname}</passphraseServerId>
+							<skip>${skip.gpg.signing}</skip>
 							<!-- since gpg2, pinentry mode has to be set to loopback for unattended 
 								passphrase usage -->
 							<gpgArguments>
@@ -185,6 +195,9 @@
 		<profile>
 			<!-- This profile is supposed to be explicitly set by commandline -Pstaging -->
 			<id>staging</id>
+			<properties>
+				<skip.gpg.signing>false</skip.gpg.signing>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
