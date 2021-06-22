@@ -5,7 +5,7 @@
 
 	<groupId>de.mhoffrogge</groupId>
 	<artifactId>org-parent</artifactId>
-	<version>3</version>
+	<version>4</version>
 	<packaging>pom</packaging>
 
 	<name>mhoffrogge</name>
@@ -61,6 +61,8 @@
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
 		<version.maven-javadoc-plugin>3.2.0</version.maven-javadoc-plugin>
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
+        <version.maven-install-plugin>2.5.2</version.maven-install-plugin>
+        <version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
 		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
 		<version.unleash-maven-plugin>2.9.3</version.unleash-maven-plugin>
@@ -108,6 +110,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-install-plugin</artifactId>
+					<version>${version.maven-install-plugin}</version>
 					<configuration>
 						<installAtEnd>true</installAtEnd>
 					</configuration>
@@ -115,6 +118,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
+                    <version>${version.maven-deploy-plugin}</version>
 					<configuration>
 						<deployAtEnd>true</deployAtEnd>
 					</configuration>
@@ -193,7 +197,7 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- This profile is supposed to be explicitly set by commandline -Pstaging -->
+			<!-- This profile is supposed to be explicitly set by commandline: mvn deploy -Pstaging -->
 			<id>staging</id>
 			<properties>
 				<skip.gpg.signing>false</skip.gpg.signing>
