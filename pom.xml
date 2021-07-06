@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -61,8 +62,8 @@
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
 		<version.maven-javadoc-plugin>3.2.0</version.maven-javadoc-plugin>
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
-        <version.maven-install-plugin>2.5.2</version.maven-install-plugin>
-        <version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
+		<version.maven-install-plugin>2.5.2</version.maven-install-plugin>
+		<version.maven-deploy-plugin>2.8.2</version.maven-deploy-plugin>
 		<version.nexus-staging-maven-plugin>1.6.8</version.nexus-staging-maven-plugin>
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
 		<version.unleash-maven-plugin>2.9.3</version.unleash-maven-plugin>
@@ -118,7 +119,7 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
-                    <version>${version.maven-deploy-plugin}</version>
+					<version>${version.maven-deploy-plugin}</version>
 					<configuration>
 						<deployAtEnd>true</deployAtEnd>
 					</configuration>
@@ -197,7 +198,8 @@
 			</build>
 		</profile>
 		<profile>
-			<!-- This profile is supposed to be explicitly set by commandline: mvn deploy -Pstaging -->
+			<!-- This profile is supposed to be explicitly set by commandline: -->
+			<!-- mvn deploy -Pstaging -->
 			<id>staging</id>
 			<properties>
 				<skip.gpg.signing>false</skip.gpg.signing>
