@@ -6,7 +6,7 @@
 
 	<groupId>de.mhoffrogge</groupId>
 	<artifactId>org-parent</artifactId>
-	<version>4</version>
+	<version>5</version>
 	<packaging>pom</packaging>
 
 	<name>mhoffrogge</name>
@@ -59,6 +59,7 @@
 
 	<properties>
 		<project.scm.id>github</project.scm.id>
+		<version.maven-antrun-plugin>3.0.0</version.maven-antrun-plugin>
 		<version.maven-gpg-plugin>1.6</version.maven-gpg-plugin>
 		<version.maven-javadoc-plugin>3.2.0</version.maven-javadoc-plugin>
 		<version.maven-source-plugin>3.0.1</version.maven-source-plugin>
@@ -68,6 +69,7 @@
 		<version.maven-release-plugin>2.5.3</version.maven-release-plugin>
 		<version.unleash-maven-plugin>2.9.3</version.unleash-maven-plugin>
 		<version.unleash-scm-provider-git>2.2.0</version.unleash-scm-provider-git>
+		<version.ant-contrib>1.0b3</version.ant-contrib>
 		<skip.attach-sources>false</skip.attach-sources>
 		<!-- Overwrite <phase.attach-javadocs> with none or empty value, if attached-javadocs 
 			must be skipped -->
@@ -79,6 +81,41 @@
 	<build>
 		<pluginManagement>
 			<plugins>
+               <plugin>
+                    <artifactId>maven-antrun-plugin</artifactId>
+                    <version>${version.maven-antrun-plugin}</version>
+                    <executions>
+                        <execution>
+                            <!-- Template configuration for ant-contrib usage -->
+                            <!-- => phase is set to _NEVER_ to disable any execution -->
+                            <phase>_NEVER_</phase>
+                            <configuration>
+                                <target>
+                                    <taskdef resource="net/sf/antcontrib/antcontrib.properties"
+                                        classpathref="maven.plugin.classpath" />
+                                    <!-- Place any Ant task here. You can add anything you can add between <target> and </target> 
+                                        in a build.xml. -->
+                                </target>
+                            </configuration>
+                            <goals>
+                                <goal>run</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <dependencies>
+                        <dependency>
+                            <groupId>ant-contrib</groupId>
+                            <artifactId>ant-contrib</artifactId>
+                            <version>${version.ant-contrib}</version>
+                            <exclusions>
+                                <exclusion>
+                                    <groupId>ant</groupId>
+                                    <artifactId>ant</artifactId>
+                                </exclusion>
+                            </exclusions>
+                        </dependency>
+                    </dependencies>
+                </plugin>
 				<plugin>
 					<groupId>com.itemis.maven.plugins</groupId>
 					<artifactId>unleash-maven-plugin</artifactId>
